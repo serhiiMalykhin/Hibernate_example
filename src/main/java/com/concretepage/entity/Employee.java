@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
@@ -15,23 +16,19 @@ import java.util.Set;
 public class Employee {
     @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "city")
     private String city;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "employee_book",
-            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id")
-    )
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Book> books;
 
     public Employee() {
     }
 
-    public Employee(int id, String name, String city) {
+    public Employee(Integer id, String name, String city) {
         this.id = id;
         this.name = name;
         this.city = city;
