@@ -1,13 +1,46 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-archivesBaseName = 'HibernateJPA'
-version = '1'
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.4.4' // Specify the Spring Boot version
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'eclipse'
+}
+
+group = 'com.example'
+archivesBaseName = 'SpringWithHibernateJPA'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 repositories {
     mavenCentral()
 }
+
 dependencies {
-    compile 'org.hibernate:hibernate-core:5.0.7.Final'
-    compile 'org.hibernate:hibernate-entitymanager:5.0.7.Final'
-    compile 'org.postgresql:postgresql:42.6.0'
-    compile 'javax.xml.bind:jaxb-api:2.3.0'
-}  
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // PostgreSQL Driver
+    runtimeOnly 'org.postgresql:postgresql:42.6.0'
+
+    // JAXB API
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+
+    // Logging dependencies
+//    implementation 'org.slf4j:slf4j-api:2.0.9' // Explicit SLF4J API version
+//    implementation 'ch.qos.logback:logback-classic:1.4.11' // Logback implementation for SLF4J
+
+//    // Lombok for logging and other utilities
+//    compileOnly 'org.projectlombok:lombok:1.18.30'
+//    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+//
+//    // Add for tests as well
+//    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+//    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
