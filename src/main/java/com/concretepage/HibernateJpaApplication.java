@@ -27,7 +27,8 @@ public class HibernateJpaApplication {
                     null, "", Instant.now(), true, candidate);
             candidate.add(activity);
             repository.saveAndFlush(candidate);
-            log.info("activity id={} is null", activity.getId());
+            log.info("activity id={} is NOT null", activity.getId());
+            System.exit(1);
         };
     }
 }
